@@ -26,7 +26,8 @@ class MyH2OAutoEncoderAnomalyTransformer(CustomTransformer):
     def fit_transform(self, X: dt.Frame, y: np.array = None):
         h2o.init(port=config.h2o_recipes_port)
         model = H2OAutoEncoderEstimator(activation='TanhWithDropout',
-                                        hidden_dropout_ratios=0.1,
+                                        hidden_dropout_ratios=[0.1, 0.1, 0.1, 0.1, 0.0,
+                                                                0.1, 0.1, 0.1, 0.1],
                                         mini_batch_size=512,
                                         epochs=10,
                                         hidden=[512, 512, 1024, 1024, 100,
